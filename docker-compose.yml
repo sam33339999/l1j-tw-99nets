@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+  db350:
+    image: mysql:5.5.62
+    ports:
+      - 13306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - ./L1J-TW_3.50c:/app-temp
+  db380:
+    image: mysql:5.5.62
+    ports:
+      - 13307:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - ./L1J-TW_3.80c:/app-temp
+
+  # app server
+  serv350:
+    build:
+      dockerfile: ./dockerfiles/l1j35.Dockerfile
+    ports:
+      - 22000:2000
+    volumes:
+      - ./L1J-TW_3.50c:/app
+  serv380:
+    build:
+      dockerfile: ./dockerfiles/l1j38.Dockerfile
+    ports:
+      - 22001:2000
+    volumes:
+      - ./L1J-TW_3.80c:/app
+    
